@@ -1,19 +1,20 @@
 =head1 NAME
 
-GD::Graph::ohlc - GD::Graph type that shows open, high, low and close as ticks on little sticks
+GD::Graph::candlesticks - GD::Graph type that shows open, high, low and close as "candlesticks"
 
 =head1 SYNOPSIS
 
-Create an chart, displaying the open, high, low, and close -- normally for
-stock data.  The data points for ohlc charts are completely different from all
-the other graph types, they must be four tuples, C<[$o,$h,$l,$c]>, instead of
-single scalar values.  See the L</DATA> section for an explanation.
+Create an chart, displaying the open, high, low, and close -- normally for stock
+data -- as candlesticks.  The data points for candlestick charts are completely
+different from all the other graph types, they must be four tuples,
+C<[$o,$h,$l,$c]>, instead of single scalar values.  See the L</DATA> section
+for an explanation.
 
 =head1 DATA
 
-The data points for ohlc and ohlc-mixed graphs must be four tuples -- instead
-of the single scalar number the other L<GD::Graph>s take.  This would feed
-nicely into an ohlc-mixed graph:
+The data points for candlesticks and candlesticks-mixed graphs must be four
+tuples -- instead of the single scalar number the other L<GD::Graph>s take.
+This would feed nicely into an candlesticks-mixed graph:
 
     @data = (
         ['1st', '2nd', '3rd'],
@@ -21,15 +22,20 @@ nicely into an ohlc-mixed graph:
         [ [1,2,3,4], [1,2,3,4], [1,2,3,4] ],
     );
 
+=head1 NEW OPTION
+
+This module adds a new option: C<candlestick_width> (default: 7).  It is the
+overall width of the candlestick.  Candlesticks shouldn't touch the way
+bar-graphs would, so this seemed to require a new option.
+
 =head1 EXAMPLE
 
-This example turns out like this: L<https://voltar.org/PerlModules/ohlc_example.png>.
+This example turns out like this: L<https://voltar.org/PerlModules/candlesticks_example.png>.
 
     use strict;
     use warnings;
     use List::Util qw(min max);
-    use GD::Graph::ohlc;
-    use GD::Graph::mixed;
+    use GD::Graph::candlesticks;
 
     my @msft = (     #  open       high       low        close
         ["2007/12/18", "34.6400", "35.0000", "34.2100", "34.7400"],
@@ -68,29 +74,28 @@ This example turns out like this: L<https://voltar.org/PerlModules/ohlc_example.
     my $min_point  = min(@all_points);
     my $max_point  = max(@all_points);
 
-    my $graph = GD::Graph::mixed->new(800, 400);
+    my $graph = GD::Graph::candlesticks->new(800, 400);
        $graph->set( 
             x_labels_vertical => 1,
             x_label           => 'Trade Date',
             y_label           => 'NASDAQ:MSFT',
             title             => "Example OHLC",
             transparent       => 0,
-            dclrs             => [qw(lgray blue)],
-            types             => [qw(lines ohlc)],
+            candlestick_width => 7,
+            dclrs             => [qw(blue)],
             y_min_value       => $min_point-0.2,
             y_max_value       => $max_point+0.2,
             y_number_format   => '%0.2f',
 
         ) or warn $graph->error;
 
-    my $data_ohlc = [
+    my $data_candlesticks = [
         [ map {$_->[0]} @msft ],       # date
-        [ map {$_->[4]} @msft ],       # close
-        [ map {[@$_[1 .. 4]]} @msft ], # ohlc
+        [ map {[@$_[1 .. 4]]} @msft ], # candlesticks
     ];
 
-    my $gd = $graph->plot($data_ohlc) or die $graph->error;
-    open my $dump, ">ohlc_example.png" or die $!;
+    my $gd = $graph->plot($data_candlesticks) or die $graph->error;
+    open my $dump, ">candlesticks_example.png" or die $!;
     print $dump $gd->png;
     close $dump;
 
@@ -111,5 +116,6 @@ Copyright (c) 2009 Paul Miller
 
 =head1 SEE ALSO
 
-perl(1), L<GD::Graph>, L<GD::Graph::candlesticks>,
-L<OHLC@wikipedia|http://en.wikipedia.org/wiki/OHLC>
+perl(1), L<GD::Graph>, L<GD::Graph::ohlc>,
+L<candlesticks@wikipedia|http://en.wikipedia.org/wiki/Candlestick_chart>,
+L<error bars|http://en.wikipedia.org/wiki/Error_bars>
