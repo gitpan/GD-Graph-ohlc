@@ -1,4 +1,6 @@
-# vi:set syntax=perl:
+
+use strict;
+use warnings;
 
 use ExtUtils::MakeMaker;
 
@@ -11,15 +13,15 @@ WriteMakefile(
     },
 
     ($ExtUtils::MakeMaker::VERSION ge '6.48'? 
-        (MIN_PERL_VERSION => 5.008,
+        (MIN_PERL_VERSION => 5.006001,
             META_MERGE => {
                 keywords => [qw(graph open close)],
                 resources=> {
-                    repository => 'http://github.com/jettero/gd--graph--ohlc/tree',
+                    repository => 'http://github.com/jettero/gd--graph--ohlc/',
                 },
             },
 
-        LICENSE	=> 'lgpl2',
+        LICENSE	=> 'LGPL',
     ) : ()),
 
     # clean => { FILES => 'blargorious' },
