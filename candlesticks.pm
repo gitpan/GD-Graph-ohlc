@@ -14,7 +14,7 @@ use GD::Graph::colour qw(:colours);
 
 use constant PI => 4 * atan2(1,1);
 
-our $VERSION = "0.9602";
+our $VERSION = "0.9605";
 our @ISA = qw(GD::Graph::axestype);
 
 our %DEFAULT = (
@@ -101,11 +101,11 @@ sub candlesticks_marker {
 
     my $h = $this->half_width;
     if( $cy>$oy ) {
-        $this->{graph}->filledRectangle( ($cx - $h, $cy) => ($ox + $h, $oy), $this->{bgci} );
-        $this->{graph}->rectangle(       ($cx - $h, $cy) => ($ox + $h, $oy), $mclr );
+        $this->{graph}->filledRectangle( ($cx - $h, $cy) => ($ox + $h, $oy), $mclr );
 
     } else {
-        $this->{graph}->filledRectangle( ($cx - $h, $cy) => ($ox + $h, $oy), $mclr );
+        $this->{graph}->filledRectangle( ($cx - $h, $cy) => ($ox + $h, $oy), $this->{bgci} );
+        $this->{graph}->rectangle(       ($cx - $h, $cy) => ($ox + $h, $oy), $mclr );
     }
 
     return;
