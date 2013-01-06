@@ -1,7 +1,7 @@
 #==========================================================================
 #              Copyright (c) 2008 Paul Miller
 #==========================================================================
- 
+
 package GD::Graph::ohlc;
 
 use strict;
@@ -14,7 +14,7 @@ use GD::Graph::colour qw(:colours);
 
 use constant PI => 4 * atan2(1,1);
 
-our $VERSION = "0.9606";
+our $VERSION = "0.9607";
 our @ISA = qw(GD::Graph::axestype);
 
 push @GD::Graph::mixed::ISA, __PACKAGE__;
@@ -76,7 +76,7 @@ sub ohlc_marker {
     $self->{graph}->line( ($ox,$oy) => ($ox-2,$oy), $mclr );
     $self->{graph}->line( ($cx,$cy) => ($cx+2,$cy), $mclr );
     $self->{graph}->line( ($lx,$ly) => ($hx,$hy),   $mclr );
-    
+
     return;
 }
 # }}}
