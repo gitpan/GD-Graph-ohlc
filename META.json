@@ -4,7 +4,7 @@
       "unknown"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "ExtUtils::MakeMaker version 6.64, CPAN::Meta::Converter version 2.112621",
+   "generated_by" : "ExtUtils::MakeMaker version 6.68, CPAN::Meta::Converter version 2.112621",
    "keywords" : [
       "graph",
       "open",
@@ -48,5 +48,5 @@
          "url" : "http://github.com/jettero/gd--graph--ohlc/"
       }
    },
-   "version" : "0.9607"
+   "version" : "0.9700"
 }

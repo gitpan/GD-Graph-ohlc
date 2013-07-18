@@ -14,7 +14,7 @@ use GD::Graph::colour qw(:colours);
 
 use constant PI => 4 * atan2(1,1);
 
-our $VERSION = "0.9607";
+our $VERSION = "0.9700";
 our @ISA = qw(GD::Graph::axestype);
 
 our %DEFAULT = (
@@ -114,7 +114,8 @@ sub candlesticks_marker_coordinates {
     my ($ox,$oy, $cx,$cy, $lx,$ly, $hx,$hy) = @_;
 
     my $h = $this->half_width;
-    return ( $ox - $h, $cx + $h, $hy, $ly );
+    my ($l,$t,$r,$b) = ($ox - $h, $hy, $ox + $h, $ly);
+    return ($t <= $b) ? ( $l, $t, $r, $b ) : ( $l, $b, $r, $t );
 }
 # }}}
 # candlesticks_marker {{{
