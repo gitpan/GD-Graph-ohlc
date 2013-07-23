@@ -26,4 +26,4 @@ requires:
   perl: 5.006001
 resources:
   repository: http://github.com/jettero/gd--graph--ohlc/
-version: 0.9700
+version: 0.9703
